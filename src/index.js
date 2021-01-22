@@ -2,9 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { default: axios } = require("axios");
 
-let app = express();
+const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+const port = process.env.port || 8080
 
 const getExchangeRates = async (base, currency) => {
   if (base && !currency) {
@@ -65,5 +67,5 @@ app.get("/api/rates", async (req, res) => {
 });
 
 app.listen(8080, function () {
-  console.log("Server is listening on port 8080");
+  console.log("Server is listening on port " + port);
 });
